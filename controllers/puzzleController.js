@@ -15,8 +15,8 @@ exports.comment_create_post = (req,res) => {
 exports.create_post = [ 
     body("title").trim().isLength({min: 4, max: 30}).escape(),
     body("description").isLength({min: 10, max: 1000}).escape(),
-    body("play_time").isLength({max: 30}).escape(),
-    body("cells_per_side").isLength({min: 3, max: 8}),
+    body("play_time").isInt({max: 30}).escape(),
+    body("cells_per_side").isInt({min: 3, max: 8}).escape(),
     
     async (req,res) => {
         const errors = validationResult(req)
@@ -35,6 +35,7 @@ exports.create_post = [
 
             }
             )
+            console.log(newPuzzle)
             await newPuzzle.save()
         }
         else(res.json(errors))
