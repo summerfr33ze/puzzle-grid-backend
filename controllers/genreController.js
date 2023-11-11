@@ -10,13 +10,15 @@ exports.allFeaturedPuzzles = async (req,res,next) => {
 }
 
 exports.featuredSportsPuzzles = async (req,res,next) => {
-    const SportsPuzzles = await Puzzle.find({featured:true}, "title genre play_time cells_per_side background_colors text_color featured")
+    const SportsPuzzles = await Puzzle.find({})
     .sort({name: 1})
     .populate({
     path: "genre", 
     match: {'title' : {$eq: 'Sports'}}
     })
     .exec()
+    
+    res.json(SportsPuzzles)
 }
 
 exports.featuredTVandMoviesPuzzles = async (req,res,next) => {
