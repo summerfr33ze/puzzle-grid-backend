@@ -4,10 +4,10 @@ const puzzleController = require("../controllers/puzzleController")
 const genreController = require("../controllers/genreController")
 const authController = require("../controllers/authController")
 
-router.get("/", genreController.allFeaturedPuzzles)
+router.get("/genres/all", genreController.allFeaturedPuzzles)
 
-router.get("/puzzles/:puzzleId", puzzleController.current_puzzle_get)
-router.post("/puzzles/:puzzleId/comments", puzzleController.comment_create_post)
+router.get("/genres/:genreId/puzzles/:puzzleId", puzzleController.current_puzzle_get)
+router.post("/genres/:genreId/puzzles/:puzzleId/comments", puzzleController.comment_create_post)
 router.post("/create", puzzleController.create_post)
 
 router.get("/genres/sports", genreController.featuredSportsPuzzles)

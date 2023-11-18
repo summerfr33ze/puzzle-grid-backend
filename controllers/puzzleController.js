@@ -2,10 +2,14 @@ const Puzzle = require("../models/puzzle")
 const Comment = require("../models/comment")
 const { body, validationResult } = require("express-validator")
 
-exports.current_puzzle_get = (req, res) => {
-    const currentPuzzle = Puzzle.findById(req.params.puzzleId)
+exports.current_puzzle_get = async (req, res) => {
+    
+    const currentPuzzle = await Puzzle.findById(req.params.puzzleId)
     .populate("genre")
     .exec()
+    
+    
+    res.json(currentPuzzle)
 }
 
 exports.comment_create_post = (req,res) => {
