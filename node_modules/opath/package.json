@@ -1,0 +1,30 @@
+{
+  "name": "opath",
+  "version": "1.0.0",
+  "description": "Object-oriented path utility",
+  "main": "lib/Path.js",
+  "directories": {
+  	"lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha --ui qunit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/curvedmark/opath.git"
+  },
+  "keywords": [
+    "path",
+    "utility",
+    "util"
+  ],
+  "author": "Glen Huang <curvedmark@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/curvedmark/opath/issues"
+  },
+  "devDependencies": {
+    "mocha": "1.x"
+  }
+}

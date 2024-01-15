@@ -1,10 +1,18 @@
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
-const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const passport = require('passport')
+const cookieParser = require('cookie-parser');
 require('dotenv').config(
 )
+const JwtStrategy = require('passport-jwt').Strategy
+const ExtractJwt = require('passport-jwt').ExtractJwt
+const opts = {}
+opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+opts.secretOrKey = 'secret';
+opts.issuer = 'localhost:3000';
+opts.audience = 'localhost:3001';
 const cors = require("cors")
 
 const apiRouter = require('./routes/api');
@@ -22,6 +30,8 @@ async function main() {
 }
 
 
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -29,11 +39,23 @@ app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(express.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cookieParser());
 app.use('/', apiRouter);
-
+passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
+  User.findOne({id: jwt_payload.sub}, function(err, user) {
+      if (err) {
+          return done(err, false);
+      }
+      if (user) {
+          return done(null, user);
+      } else {
+          return done(null, false);
+          // or you could create a new account
+      }
+  });
+}));
 
 
 

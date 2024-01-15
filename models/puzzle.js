@@ -8,11 +8,10 @@ const PuzzleSchema = new Schema({
     play_time: {type: Number, max: 30},
     cells_per_side: {type: Number, min: 3, max: 8 },
     background_colors: {type: String},
-    text_color: {type: String},
     featured: {type: Boolean, required: true},
     data_array: {type: Array, required: true},
-    colorOne: {type: String},
-    colorTwo: {type: String}
+    color_one: {type: String},
+    color_two: {type:String}
     
 })
 

@@ -16,8 +16,8 @@ router.get("/genres/tv-and-movies", genreController.featuredTVandMoviesPuzzles)
 router.get("/genres/literature", genreController.featuredLiteraturePuzzles)
 router.get("/genres/miscellaneous", genreController.featuredMiscellaneousPuzzles)
 
-// router.post("/login", authController.login_post)
-// router.post("/signup", authController.signup_post)
+router.post("/login", authController.login_post)
+router.post("/signup", authController.signup_post)
 
 module.exports = router
 
