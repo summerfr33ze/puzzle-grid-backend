@@ -29,17 +29,16 @@ exports.create_post = [
                 title: req.body.title,
                 description: req.body.description,
                 genre: req.body.genre,
+                user: req.user,
                 play_time: req.body.play_time,
                 cells_per_side: req.body.cells_per_side,
                 data_array: req.body.data_array,
                 colorOne: req.body.colorOne,
                 colorTwo: req.body.colorTwo,
-                
                 featured: req.body.featured
 
             }
             )
-            console.log(newPuzzle)
             await newPuzzle.save()
         }
         else(res.json(errors))

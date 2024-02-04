@@ -2,17 +2,15 @@ const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const logger = require('morgan');
-const passport = require('passport')
 const cookieParser = require('cookie-parser');
 require('dotenv').config(
 )
-const JwtStrategy = require('passport-jwt').Strategy
-const ExtractJwt = require('passport-jwt').ExtractJwt
-const opts = {}
-opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = 'secret';
-opts.issuer = 'localhost:3000';
-opts.audience = 'localhost:3001';
+
+
+const passport = require('passport')
+const jwtStrategy = require('./strategies/jwt')
+passport.use(jwtStrategy);
+
 const cors = require("cors")
 
 const apiRouter = require('./routes/api');
@@ -43,19 +41,7 @@ app.use(express.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
 app.use('/', apiRouter);
-passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
-  User.findOne({id: jwt_payload.sub}, function(err, user) {
-      if (err) {
-          return done(err, false);
-      }
-      if (user) {
-          return done(null, user);
-      } else {
-          return done(null, false);
-          // or you could create a new account
-      }
-  });
-}));
+
 
 
 

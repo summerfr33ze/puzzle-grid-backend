@@ -1,4 +1,5 @@
 const express = require("express")
+const passport = require("passport")
 const router = express.Router()
 const puzzleController = require("../controllers/puzzleController")
 const genreController = require("../controllers/genreController")
@@ -8,7 +9,7 @@ router.get("/genres/all", genreController.allFeaturedPuzzles)
 
 router.get("/genres/:genreId/puzzles/:puzzleId", puzzleController.current_puzzle_get)
 router.post("/genres/:genreId/puzzles/:puzzleId/comments", puzzleController.comment_create_post)
-router.post("/create", puzzleController.create_post)
+router.post("/create", passport.authenticate('jwt', { session: false }), puzzleController.create_post)
 
 router.get("/genres/sports", genreController.featuredSportsPuzzles)
 router.get("/genres/numbers", genreController.featuredNumbersPuzzles)

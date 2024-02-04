@@ -55,7 +55,7 @@ exports.login_post = async (req,res) => {
         })
       }
       if(r) {
-        const secret = process.env.JWT_KEY
+        const secret = process.env.SECRET
         
           const token = jwt.sign({
             username: user[0].username,
