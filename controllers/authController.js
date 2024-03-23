@@ -57,7 +57,7 @@ exports.login_post = async (req,res) => {
       if(r) {
         const secret = process.env.SECRET
         
-          const token = jwt.sign({
+          const jwtToken = jwt.sign({
             username: user[0].username,
             user_id: user[0]._id
           }
@@ -65,13 +65,24 @@ exports.login_post = async (req,res) => {
           {
             expiresIn: "1h"
           })
-          console.log(token)
+
+          const refreshToken = jwt.sign({
+            username: user[0].username,
+            user_id: user[0]._id
+          }
+          , secret,
+          {
+            expiresIn: "7d"
+          })
+
+          
+          
           return res.status(200).json({
             message: "auth successful",
-            token: token
+            jwt_token: jwtToken
           })
       
-      }
+        }
       else{
         return res.status(401).json({
           message: "auth failed"

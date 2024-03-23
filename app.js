@@ -5,7 +5,7 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 require('dotenv').config(
 )
-
+jwt = require('jsonwebtoken')
 
 const passport = require('passport')
 const jwtStrategy = require('./strategies/jwt')
@@ -62,5 +62,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
 
 module.exports = app;
