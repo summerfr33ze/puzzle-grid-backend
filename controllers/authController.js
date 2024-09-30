@@ -63,7 +63,7 @@ exports.login_post = async (req,res) => {
           }
           , secret,
           {
-            expiresIn: "1h"
+            expiresIn: "1d"
           })
 
           const refreshToken = jwt.sign({

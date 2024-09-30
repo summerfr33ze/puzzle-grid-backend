@@ -5,7 +5,7 @@ const PuzzleSchema = new Schema({
     title: {type: String, min: 4, max: 30, required: true },
     description: {type: String, min: 10, max: 1000, required: true},
     genre: {type: Schema.Types.ObjectId, ref: "Genre", required: true},
-    user: {type: Schema.Types.ObjectId, ref: "User", required: true},
+    userId: {type: Schema.Types.ObjectId, ref: "User", required: true},
     play_time: {type: Number, max: 30},
     cells_per_side: {type: Number, min: 3, max: 8 },
     background_colors: {type: String},

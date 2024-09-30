@@ -17,10 +17,10 @@ exports.comment_create_post = (req,res) => {
 }
 
 exports.create_post = [ 
-    body("title").trim().isLength({min: 4, max: 30}).escape(),
-    body("description").isLength({min: 10, max: 1000}).escape(),
-    body("play_time").isInt({max: 30}).escape(),
-    body("cells_per_side").isInt({min: 3, max: 8}).escape(),
+    body("title").trim().isLength({min: 4, max: 30}),
+    body("description").isLength({min: 10, max: 1000}),
+    body("play_time").isInt({max: 30}),
+    body("cells_per_side").isInt({min: 3, max: 8}),
     
     async (req,res) => {
         const errors = validationResult(req)
@@ -29,7 +29,7 @@ exports.create_post = [
                 title: req.body.title,
                 description: req.body.description,
                 genre: req.body.genre,
-                user: req.user,
+                userId: req.user._id,
                 play_time: req.body.play_time,
                 cells_per_side: req.body.cells_per_side,
                 data_array: req.body.data_array,

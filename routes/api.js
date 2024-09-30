@@ -16,6 +16,7 @@ router.get("/genres/numbers", genreController.featuredNumbersPuzzles)
 router.get("/genres/tv-and-movies", genreController.featuredTVandMoviesPuzzles)
 router.get("/genres/literature", genreController.featuredLiteraturePuzzles)
 router.get("/genres/miscellaneous", genreController.featuredMiscellaneousPuzzles)
+router.get("/mypuzzles/:userId", passport.authenticate('jwt', { session:false}), genreController.userPuzzles)
 
 router.post("/login", authController.login_post)
 router.post("/signup", authController.signup_post)
