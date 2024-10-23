@@ -33,8 +33,8 @@ exports.create_post = [
                 play_time: req.body.play_time,
                 cells_per_side: req.body.cells_per_side,
                 data_array: req.body.data_array,
-                colorOne: req.body.colorOne,
-                colorTwo: req.body.colorTwo,
+                color_one: req.body.color_one,
+                color_two: req.body.color_two,
                 featured: req.body.featured
 
             }
