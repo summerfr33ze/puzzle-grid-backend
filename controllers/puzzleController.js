@@ -44,3 +44,21 @@ exports.create_post = [
         else(res.json(errors))
     }
 ] 
+
+exports.edit_post = [
+    body("title").trim().isLength({min: 4, max: 30}),
+    body("description").isLength({min: 10, max: 1000}),
+    body("play_time").isInt({max: 30}),
+    body("cells_per_side").isInt({min: 3, max: 8}),
+
+   async (req,res) => {
+    const errors = validationResult(req)
+    if(errors.isEmpty()){
+        const puzzle = Puzzle.findById(req.body.id)
+        puzzle.overwrite(req.body)
+        puzzle.save()
+    }
+    else(res.json(errors))
+
+}
+]

@@ -3,9 +3,8 @@ const express = require('express');
 const path = require('path');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
-require('dotenv').config(
-)
-jwt = require('jsonwebtoken')
+require('dotenv').config()
+const jwt = require('jsonwebtoken')
 
 const passport = require('passport')
 const jwtStrategy = require('./strategies/jwt')
@@ -30,9 +29,6 @@ async function main() {
 
 
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
 
 
 app.use(logger('dev'));
