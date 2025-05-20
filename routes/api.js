@@ -10,7 +10,7 @@ router.get("/genres/all", genreController.allFeaturedPuzzles)
 router.get("/genres/:genreId/puzzles/:puzzleId", puzzleController.current_puzzle_get)
 router.post("/genres/:genreId/puzzles/:puzzleId/comments", puzzleController.comment_create_post)
 router.post("/create", passport.authenticate('jwt', { session: false }), puzzleController.create_post)
-router.post("/edit", passport.authenticate('jwt', { session: false }), puzzleController.edit_post)
+router.post("/edit/:genreId/puzzles/:puzzleId", passport.authenticate('jwt', { session: false }), puzzleController.edit_post)
 
 router.get("/genres/sports", genreController.featuredSportsPuzzles)
 router.get("/genres/numbers", genreController.featuredNumbersPuzzles)

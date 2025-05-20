@@ -46,17 +46,19 @@ exports.create_post = [
 ] 
 
 exports.edit_post = [
-    body("title").trim().isLength({min: 4, max: 30}),
     body("description").isLength({min: 10, max: 1000}),
     body("play_time").isInt({max: 30}),
     body("cells_per_side").isInt({min: 3, max: 8}),
 
    async (req,res) => {
+    
     const errors = validationResult(req)
+    const puzzleTitle = req.body.title
     if(errors.isEmpty()){
-        const puzzle = Puzzle.findById(req.body.id)
-        puzzle.overwrite(req.body)
-        puzzle.save()
+        
+        const result = await Puzzle.findOneAndReplace({title: puzzleTitle}, req.body, {new: true})
+        console.log(result)
+        
     }
     else(res.json(errors))
 
